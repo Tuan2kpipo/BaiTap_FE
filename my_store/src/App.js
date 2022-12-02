@@ -29,9 +29,6 @@ function App() {
           </Route>
         </Route>
       </Routes>
-
-      {/* <CpnTable></CpnTable> */}
-      {/* <AddFormProduct></AddFormProduct> */}
     </div>
   );
 }
