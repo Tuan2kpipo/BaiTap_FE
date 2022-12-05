@@ -24,13 +24,10 @@ const style = {
 };
 
 function SearchProduct() {
-  const navigate = useNavigate();
-  const [isUpdate, setIsUpdate] = useState(false);
   const dispatch = useDispatch();
-  const { allProducts, product } = useSelector((state) => state.infoRd);
+  const { allProducts } = useSelector((state) => state.infoRd);
   const [titleCard, setTitleCard] = useState("");
   const [descriptionCard, setdescriptionCard] = useState("");
-  const token = localStorage.getItem("token");
 
   const { getSearch } = useSelector((state) => state.infoRd);
 
@@ -59,7 +56,6 @@ function SearchProduct() {
   //sua
   const handleUpdate = (id) => {
     dispatch(ACTIONS.getSingProduct(id));
-    setIsUpdate(true);
   };
 
   //xem
