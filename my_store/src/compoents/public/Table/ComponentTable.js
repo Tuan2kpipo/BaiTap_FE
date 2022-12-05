@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Table, Space, Button, Modal, Tag } from "antd";
 import { useDispatch } from "react-redux";
-import * as ACTIONS from "../store/actions/User";
-import "./CpnTable.css";
-import UpdateUser from "../public/formUser/UpdateUserForm";
+import * as ACTIONS from "../../store/Actions/UserAction";
+import "./ComponentTable.css";
+import UpdateUser from "../FormUser/UpdateUserModal";
 
 const { Column } = Table;
-function CpnTable(props) {
+function ComponentTable(props) {
   const { allInfo } = props;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -73,4 +73,4 @@ function CpnTable(props) {
   );
 }
 
-export default CpnTable;
+export default ComponentTable;

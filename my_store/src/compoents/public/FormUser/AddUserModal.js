@@ -1,13 +1,17 @@
 import React, { useState } from "react";
-import { Button, Modal, Checkbox, Form, Input } from "antd";
-import "./AddFormProduct.css";
-import { useNavigate } from "react-router-dom";
+import { Button, Modal, Checkbox, Form, Input, Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
+import "../FormProduct/AddFormProduct.css";
 import { useDispatch } from "react-redux";
-import { addProduct } from "../../store/actions/Product";
+import { addUser } from "../../store/Actions/UserAction";
+import "./AddUserModal.css";
 
-function AddFormProduct(props) {
+function AddUserForm(props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
+  // show modal
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -18,19 +22,17 @@ function AddFormProduct(props) {
     setIsModalOpen(false);
   };
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   const onFinish = (values) => {
-    setIsModalOpen(false);
-    const dataProduct = {
+    const dataUser = {
       ...values,
       id: Math.floor(Math.random() * 1000),
     };
-    dispatch(addProduct(dataProduct));
-    console.log("Success:", dataProduct);
-    navigate("/content");
+
+    dispatch(addUser(dataUser));
     setIsModalOpen(false);
+    // console.log(data);
   };
+
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
@@ -38,11 +40,12 @@ function AddFormProduct(props) {
   return (
     <>
       <Button type="primary" onClick={showModal}>
-        Thêm sản phẩm
+        Thêm người dùng
       </Button>
+
       <Modal
         forceRender
-        title="Thêm sản phẩm"
+        title="Thêm người dùng"
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
@@ -56,22 +59,18 @@ function AddFormProduct(props) {
           onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
-          <Form.Item label="Title" name="title">
+          <Form.Item label="Username" name="username">
             <Input />
           </Form.Item>
 
-          <Form.Item label="Description" name="description">
+          <Form.Item label="Email" name="email">
             <Input />
           </Form.Item>
 
-          <Form.Item label="Price" name="price">
+          <Form.Item label="Password" name="password">
             <Input />
           </Form.Item>
-          <Form.Item label="Category" name="category">
-            <Input />
-          </Form.Item>
-
-          <Form.Item label="Image" name="image">
+          <Form.Item label="Phone" name="phone">
             <Input />
           </Form.Item>
 
@@ -85,4 +84,4 @@ function AddFormProduct(props) {
     </>
   );
 }
-export default AddFormProduct;
+export default AddUserForm;

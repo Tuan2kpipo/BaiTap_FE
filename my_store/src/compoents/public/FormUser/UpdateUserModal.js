@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Button, Modal, Checkbox, Form, Input } from "antd";
-import "../formProduct/AddFormProduct.css";
+import "../FormProduct/AddFormProduct.css";
 import { useDispatch } from "react-redux";
-import { addUser, updateUserr } from "../../store/actions/User";
+import { addUser, updateUser } from "../../store/Actions/UserAction";
 
 function AddUserForm(props) {
   const { idupdateUser } = props;
@@ -21,7 +21,7 @@ function AddUserForm(props) {
   };
 
   const onFinish = (values) => {
-    dispatch(updateUserr(values, idupdateUser.id));
+    dispatch(updateUser(values, idupdateUser.id));
     setIsModalOpen(false);
   };
   const onFinishFailed = (errorInfo) => {

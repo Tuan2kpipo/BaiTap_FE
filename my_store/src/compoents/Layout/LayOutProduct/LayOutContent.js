@@ -7,15 +7,16 @@ import {
   Divider,
   Button,
   Modal,
+  Spin,
 } from "antd";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import * as ACTIONS from "../store/actions/Product";
-import "./content.css";
+import * as ACTIONS from "../../store/Actions/ProductAction";
 import "./LayOutContent.css";
 import { useNavigate } from "react-router-dom";
-import AddFormProduct from "../public/formProduct/AddFormProduct";
-import UpdateFormProduct from "../public/formProduct/UpdateFormProduct";
+import AddFormProduct from "../../public/FormProduct/AddProductModal";
+import UpdateFormProduct from "../../public/FormProduct/UpdateProductModal";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const { Content } = Layout;
 const { Meta } = Card;
@@ -29,13 +30,12 @@ const style = {
 
 function LayOutContent() {
   const navigate = useNavigate();
-  const [isUpdate, setIsUpdate] = useState(false);
   const dispatch = useDispatch();
-  const { allProducts } = useSelector((state) => state.infoRd);
+  const { allProducts, getProductFalse, loading } = useSelector(
+    (state) => state.productRd
+  );
   const [titleCard, setTitleCard] = useState("");
   const [descriptionCard, setdescriptionCard] = useState("");
-  const [showModalUpdate, setShowModalUpdate] = useState(false);
-  const token = localStorage.getItem("token");
 
   // cac ham cua modal
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -59,13 +59,6 @@ function LayOutContent() {
     }
   };
 
-  //sua
-  const handleUpdate = (id) => {
-    dispatch(ACTIONS.getSingProduct(id));
-    // setIsUpdate(true);
-    setShowModalUpdate(true);
-  };
-
   //xem
   const handleDetail = (products) => {
     setIsModalOpen(true);
@@ -73,7 +66,8 @@ function LayOutContent() {
     setdescriptionCard(products.description);
   };
 
-  const handleUser = () => {
+  // click chuyen sang trang uẻ
+  const handleInfoUser = () => {
     navigate("/user");
   };
 
@@ -99,9 +93,18 @@ function LayOutContent() {
         >
           <AddFormProduct></AddFormProduct>
 
-          <Button type="primary" onClick={handleUser}>
+          <Button type="primary" onClick={handleInfoUser}>
             Thông tin người dùng
           </Button>
+
+          {loading && (
+            <LoadingOutlined
+              style={{
+                fontSize: 24,
+              }}
+              spin
+            />
+          )}
 
           <Divider orientation="left">Danh sách sản phẩm</Divider>
           <Row gutter={16}>

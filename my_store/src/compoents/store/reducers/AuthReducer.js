@@ -1,7 +1,9 @@
-import * as Types from "../types";
+import * as Types from "../Types";
 
 const reducerInitialState = {
   isLoggedIn: false,
+  loading: null,
+  loginFalse: null,
 };
 
 const tokenuser = {
@@ -12,10 +14,20 @@ const authUser = (state = reducerInitialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case Types.LOGIN:
+    case Types.LOGIN_REQUEST:
+      return { ...state, loading: true };
+    case Types.LOGIN_SUCCESS:
       return {
         ...state,
         isLoggedIn: true,
+        loading: false,
+      };
+
+    case Types.LOGIN_FALSE:
+      return {
+        ...state,
+        loginFalse: payload,
+        loading: false,
       };
 
     case Types.LOGOUT:
@@ -31,7 +43,7 @@ const authUser = (state = reducerInitialState, action) => {
 
 const authLogin = (state = tokenuser, action) => {
   switch (action.type) {
-    case Types.LOGIN:
+    case Types.LOGIN_SUCCESS:
       localStorage.setItem("token", JSON.stringify(action.payload));
 
       return {

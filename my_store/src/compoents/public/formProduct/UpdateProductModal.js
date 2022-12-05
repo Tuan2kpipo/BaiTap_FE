@@ -3,7 +3,7 @@ import { Button, Modal, Checkbox, Form, Input } from "antd";
 import "./AddFormProduct.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addProduct, updateProduct } from "../../store/actions/Product";
+import { addProduct, updateProduct } from "../../store/Actions/ProductAction";
 
 function UpdateFormProduct(props) {
   const { products } = props;

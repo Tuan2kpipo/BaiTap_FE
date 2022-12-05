@@ -1,10 +1,12 @@
-import { Button, Checkbox, Form, Input } from "antd";
+import { Button, Checkbox, Form, Input, Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { login } from "../store/actions/Auth";
+import { login } from "../store/Actions/AuthAction";
 import "./Login.css";
 function LoginForm() {
+  const { loading } = useSelector((state) => state.authRd);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -19,6 +21,14 @@ function LoginForm() {
 
   return (
     <div className="login">
+      {loading && (
+        <LoadingOutlined
+          style={{
+            fontSize: 24,
+          }}
+          spin
+        />
+      )}
       <Form
         name="basic"
         labelCol={{

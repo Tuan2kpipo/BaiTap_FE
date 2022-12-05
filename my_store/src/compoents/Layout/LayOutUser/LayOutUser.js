@@ -1,19 +1,22 @@
 import { Breadcrumb, Layout, Button, Modal } from "antd";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import * as ACTIONS from "../store/actions/User";
+import * as ACTIONS from "../../store/Actions/UserAction";
 import { useNavigate } from "react-router-dom";
-import "./InfoUser.css";
-import { Space, Table, Tag } from "antd";
-import CpnTable from "../Table/CpnTable";
-import AddUserForm from "../public/formUser/AddUserForm";
+import "./LayOutUser.css";
+import { Space, Table, Tag, Spin } from "antd";
+import ComponentTable from "../../public/Table/ComponentTable";
+import AddUserForm from "../../public/FormUser/AddUserModal";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const { Content } = Layout;
 
 function InfoUser() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { allUsers } = useSelector((state) => state.infoUS);
+  const { allUsers, loading, getUserFalse } = useSelector(
+    (state) => state.userRd
+  );
 
   //Lay tat ca du lieu
   useEffect(() => {
@@ -49,7 +52,18 @@ function InfoUser() {
 
           <AddUserForm></AddUserForm>
 
-          <CpnTable
+          {loading && (
+            <LoadingOutlined
+              style={{
+                fontSize: 24,
+              }}
+              spin
+            />
+          )}
+
+          {getUserFalse && <h1>{getUserFalse}</h1>}
+
+          <ComponentTable
             allInfo={allUsers}
             btnOne={"XEM"}
             btnTwo={"SỬA"}
@@ -76,7 +90,7 @@ function InfoUser() {
                 key: "phone",
               },
             ]}
-          ></CpnTable>
+          ></ComponentTable>
         </div>
       </Content>
     </div>

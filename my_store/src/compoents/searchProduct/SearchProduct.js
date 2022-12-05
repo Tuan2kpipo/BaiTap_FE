@@ -10,7 +10,7 @@ import {
 } from "antd";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import * as ACTIONS from "../store/actions/Product";
+import * as ACTIONS from "../store/Actions/ProductAction";
 import { useNavigate } from "react-router-dom";
 
 const { Content } = Layout;
@@ -25,11 +25,9 @@ const style = {
 
 function SearchProduct() {
   const dispatch = useDispatch();
-  const { allProducts } = useSelector((state) => state.infoRd);
+  const { allProducts, getSearch } = useSelector((state) => state.productRd);
   const [titleCard, setTitleCard] = useState("");
-  const [descriptionCard, setdescriptionCard] = useState("");
-
-  const { getSearch } = useSelector((state) => state.infoRd);
+  const [descriptionCard, setDescriptionCard] = useState("");
 
   // cac ham cua modal
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -62,7 +60,7 @@ function SearchProduct() {
   const handleDetail = (products) => {
     setIsModalOpen(true);
     setTitleCard(products.title);
-    setdescriptionCard(products.description);
+    setDescriptionCard(products.description);
   };
 
   return (

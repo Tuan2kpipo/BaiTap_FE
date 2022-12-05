@@ -1,11 +1,11 @@
 import { Button, Layout, Input, Dropdown, Space } from "antd";
 import React, { useCallback, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import "./content.css";
-import { path } from "../Ultils/Constant";
-import { useDispatch, useSelector } from "react-redux";
-import { getSearchh } from "../store/actions/Product";
-import { logout } from "../store/actions/Auth";
+import { path } from "../../Ultils/Constant";
+import { useDispatch } from "react-redux";
+import { searchProduct } from "../../store/Actions/ProductAction";
+import { logout } from "../../store/Actions/AuthAction";
+import "./LayOutHeader.css";
 
 const { Header } = Layout;
 
@@ -28,7 +28,7 @@ function LayoutStore() {
   // search
   const handleSearch = (e) => {
     const keys = e.target.value;
-    dispatch(getSearchh(keys));
+    dispatch(searchProduct(keys));
     if (keys.length > 0) {
       navigate("/search");
     } else navigate("/content");
