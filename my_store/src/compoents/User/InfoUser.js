@@ -9,15 +9,11 @@ import CpnTable from "../Table/CpnTable";
 import AddUserForm from "../public/formUser/AddUserForm";
 
 const { Content } = Layout;
-const { Column, ColumnGroup } = Table;
 
 function InfoUser() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { allUsers } = useSelector((state) => state.infoUS);
-
-  // cac ham cua modal
-  const [isModalOpenAdd, setIsModalOpenAdd] = useState(false);
 
   //Lay tat ca du lieu
   useEffect(() => {
@@ -29,9 +25,8 @@ function InfoUser() {
   };
 
   return (
-    <>
+    <div>
       <Content
-        className="site-layout"
         style={{
           padding: "0 50px",
         }}
@@ -84,7 +79,7 @@ function InfoUser() {
           ></CpnTable>
         </div>
       </Content>
-    </>
+    </div>
   );
 }
 

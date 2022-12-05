@@ -2,7 +2,7 @@ import { Button, Checkbox, Form, Input } from "antd";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { login } from "../store/actions/Product";
+import { login } from "../store/actions/Auth";
 import "./Login.css";
 function LoginForm() {
   const navigate = useNavigate();
@@ -10,7 +10,6 @@ function LoginForm() {
 
   const onFinish = (values) => {
     dispatch(login(values));
-    console.log("Success:", values);
     navigate("/content");
   };
 

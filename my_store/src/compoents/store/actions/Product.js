@@ -19,9 +19,11 @@ export const deleteProduct = (id) => {
   return function (dispatch) {
     axios
       .delete(`${BASE_URL}/products/${id}`)
-      .then((res) => {
-        console.log("res", res);
-        dispatch({ type: Types.DELETE_PRODUCT, payload: res.data.id });
+      .then(() => {
+        dispatch({
+          type: Types.DELETE_PRODUCT,
+          payload: id,
+        });
       })
       .catch((error) => console.log("error", error));
   };
@@ -33,8 +35,10 @@ export const addProduct = (product) => {
     axios
       .post(`${BASE_URL}/products`, product)
       .then((res) => {
-        console.log("them thanh cong api", res);
-        dispatch({ type: Types.ADD_PRODUCT, payload: res.data });
+        dispatch({
+          type: Types.ADD_PRODUCT,
+          payload: { ...res.data, ...product },
+        });
       })
       .catch((error) => console.log("error", error));
   };
@@ -65,25 +69,6 @@ export const updateProduct = (product, id) => {
       .catch((error) => console.log("error", error));
   };
 };
-
-// dang nhap
-export const login = (data) => {
-  return function (dispatch) {
-    axios
-      .post(`${BASE_URL}/auth/login`, data)
-      .then((res) => {
-        console.log("dang nhap cong", res);
-        localStorage.setItem("token", res.data.token);
-        dispatch({ type: Types.LOGIN, payload: res.data });
-      })
-      .catch((error) => console.log("error", error));
-  };
-};
-
-// dang xuat
-export const logout = () => ({
-  type: Types.LOGOUT,
-});
 
 // tim kiem
 export const getSearchh = (search) => ({

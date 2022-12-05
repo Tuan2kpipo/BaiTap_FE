@@ -42,9 +42,7 @@ function AddUserForm(props) {
 
   return (
     <>
-      <Button type="primary" onClick={showModal}>
-        Sửa
-      </Button>
+      <Button onClick={showModal}>Sửa</Button>
       <Modal
         forceRender
         title="Thêm người dùng"

@@ -22,7 +22,6 @@ function AddFormProduct(props) {
   const dispatch = useDispatch();
   const onFinish = (values) => {
     setIsModalOpen(false);
-
     const dataProduct = {
       ...values,
       id: Math.floor(Math.random() * 1000),
@@ -57,7 +56,7 @@ function AddFormProduct(props) {
           onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
-          <Form.Item label="Title" name="name">
+          <Form.Item label="Title" name="title">
             <Input />
           </Form.Item>
 

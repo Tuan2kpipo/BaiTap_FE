@@ -23,7 +23,7 @@ const style = {
   justifyContent: "center",
 };
 
-function InfoUser() {
+function SearchProduct() {
   const navigate = useNavigate();
   const [isUpdate, setIsUpdate] = useState(false);
   const dispatch = useDispatch();
@@ -156,4 +156,4 @@ function InfoUser() {
   );
 }
 
-export default InfoUser;
+export default SearchProduct;

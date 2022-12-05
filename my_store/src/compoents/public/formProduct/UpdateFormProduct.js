@@ -27,6 +27,7 @@ function UpdateFormProduct(props) {
     dispatch(updateProduct(values, products.id));
     console.log("Success:", values);
     navigate("/content");
+    setIsModalOpen(false);
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -87,7 +88,7 @@ function UpdateFormProduct(props) {
 
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Button type="danger" htmlType="submit">
-              Thêm
+              Sửa
             </Button>
           </Form.Item>
         </Form>

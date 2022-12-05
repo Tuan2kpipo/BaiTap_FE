@@ -3,7 +3,6 @@ import * as Types from "../types";
 const reducerInitialState = {
   allProducts: null,
   product: null,
-  userLogin: null,
   getSearch: null,
 };
 
@@ -26,7 +25,7 @@ const reducer = (state = reducerInitialState, action) => {
     case Types.ADD_PRODUCT:
       return {
         ...state,
-        allProducts: [...state.allProducts, payload],
+        allProducts: [...state.allProducts, action.payload],
       };
 
     case Types.UPDATE_PRODUCT:
@@ -43,18 +42,6 @@ const reducer = (state = reducerInitialState, action) => {
       return {
         ...state,
         allProducts: listProducts,
-      };
-
-    case Types.LOGIN:
-      return {
-        ...state,
-        userLogin: action.payload.token,
-      };
-
-    case Types.LOGOUT:
-      return {
-        ...state,
-        userLogin: null,
       };
 
     case Types.GET_SEARCH:

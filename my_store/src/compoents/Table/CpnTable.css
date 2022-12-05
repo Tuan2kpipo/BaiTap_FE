@@ -2,18 +2,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 20px;
+  margin: 20px 0;
 }
 
 .ant-spin-container {
   margin: 20px;
   width: 1000px;
-}
-
-thead .ant-table-cell {
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
 }
 
 .tb_action {
@@ -24,14 +18,23 @@ thead .ant-table-cell {
   justify-content: center;
 }
 
-.ant-table-container table > thead > tr:first-child th:last-child {
-  /* width: 100px; */
-}
-
 .space_tb {
   width: 100%;
   /* background-color: aqua; */
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.ant-table-wrapper {
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.ant-spin-container {
+  width: 97% !important;
+}
+
+.site-layout-background {
+  padding: 0 !important;
 }

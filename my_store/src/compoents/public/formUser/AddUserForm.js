@@ -3,6 +3,7 @@ import { Button, Modal, Checkbox, Form, Input } from "antd";
 import "../formProduct/AddFormProduct.css";
 import { useDispatch } from "react-redux";
 import { addUser } from "../../store/actions/User";
+import "./AddFormUser.css";
 
 function AddUserForm(props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,7 +21,11 @@ function AddUserForm(props) {
   };
 
   const onFinish = (values) => {
-    dispatch(addUser(values));
+    const dataUser = {
+      ...values,
+      id: Math.floor(Math.random() * 1000),
+    };
+    dispatch(addUser(dataUser));
     setIsModalOpen(false);
     // console.log(data);
   };
@@ -34,6 +39,7 @@ function AddUserForm(props) {
       <Button type="primary" onClick={showModal}>
         Thêm người dùng
       </Button>
+
       <Modal
         forceRender
         title="Thêm người dùng"

@@ -19,9 +19,8 @@ export const deleteUser = (id) => {
   return function (dispatch) {
     axios
       .delete(`${BASE_URL_USER}/users/${id}`)
-      .then((res) => {
-        console.log("xoa thanh cong", res);
-        dispatch({ type: Types.DELETE_USER, payload: res.data.id });
+      .then(() => {
+        dispatch({ type: Types.DELETE_USER, payload: id });
       })
       .catch((error) => console.log("error", error));
   };

@@ -5,18 +5,13 @@ import "./content.css";
 import { path } from "../Ultils/Constant";
 import { useDispatch, useSelector } from "react-redux";
 import { getSearchh } from "../store/actions/Product";
+import { logout } from "../store/actions/Auth";
 
 const { Header } = Layout;
 
 function LayoutStore() {
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
   const dispatch = useDispatch();
-
-  // den trang dang nhap
-  const goLogin = useCallback(() => {
-    navigate(path.LOGIN);
-  }, []);
 
   // den trang chinh
   const goHome = useCallback(() => {
@@ -25,14 +20,14 @@ function LayoutStore() {
 
   // dang xuat
   const logOut = () => {
-    localStorage.clear();
+    localStorage.removeItem("token");
+    dispatch(logout());
     navigate("/login");
   };
 
   // search
   const handleSearch = (e) => {
     const keys = e.target.value;
-    // setValueInput(keys);
     dispatch(getSearchh(keys));
     if (keys.length > 0) {
       navigate("/search");
@@ -56,17 +51,10 @@ function LayoutStore() {
             </Button>
 
             <Input placeholder="Tim kiem" onChange={handleSearch} />
-            {token ? (
-              <Button className="logout" onClick={logOut}>
-                Đăng xuất
-              </Button>
-            ) : (
-              <div className="dropdown">
-                <Button type="primary" onClick={goLogin}>
-                  Đăng nhập
-                </Button>
-              </div>
-            )}
+
+            <Button className="logout" onClick={logOut}>
+              Đăng xuất
+            </Button>
           </div>
         </Header>
       </Layout>
