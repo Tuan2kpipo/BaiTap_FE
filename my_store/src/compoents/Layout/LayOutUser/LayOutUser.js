@@ -14,7 +14,7 @@ const { Content } = Layout;
 function InfoUser() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { allUsers, loading, getUserFalse } = useSelector(
+  const { allUsers, loading, getUserFalse, loadingDelete } = useSelector(
     (state) => state.userRd
   );
 
@@ -29,6 +29,11 @@ function InfoUser() {
 
   return (
     <div>
+      {loadingDelete && (
+        <div className="example">
+          <Spin />
+        </div>
+      )}
       <Content
         style={{
           padding: "0 50px",

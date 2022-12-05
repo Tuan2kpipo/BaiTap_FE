@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Button, Modal, Checkbox, Form, Input } from "antd";
+import { Button, Modal, Checkbox, Form, Input, Spin } from "antd";
 import "../FormProduct/AddFormProduct.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUser, updateUser } from "../../store/Actions/UserAction";
 
 function AddUserForm(props) {
   const { idupdateUser } = props;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
+  const { loadingUpdate } = useSelector((state) => state.userRd);
 
   // show modal
   const showModal = () => {
@@ -22,7 +23,7 @@ function AddUserForm(props) {
 
   const onFinish = (values) => {
     dispatch(updateUser(values, idupdateUser.id));
-    setIsModalOpen(false);
+    // setIsModalOpen(false);
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -45,11 +46,16 @@ function AddUserForm(props) {
       <Button onClick={showModal}>Sửa</Button>
       <Modal
         forceRender
-        title="Thêm người dùng"
+        title="Sua người dùng"
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
       >
+        {loadingUpdate && (
+          <div className="example">
+            <Spin />
+          </div>
+        )}
         <Form
           form={form}
           name="basic"

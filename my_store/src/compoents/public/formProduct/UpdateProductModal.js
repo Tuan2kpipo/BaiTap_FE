@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Button, Modal, Checkbox, Form, Input } from "antd";
+import { Button, Modal, Checkbox, Form, Input, Spin } from "antd";
 import "./AddFormProduct.css";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addProduct, updateProduct } from "../../store/Actions/ProductAction";
 
 function UpdateFormProduct(props) {
   const { products } = props;
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { loadingUpdate } = useSelector((state) => state.productRd);
   // show modal
   const showModal = () => {
     setIsModalOpen(true);
@@ -27,7 +28,7 @@ function UpdateFormProduct(props) {
     dispatch(updateProduct(values, products.id));
     console.log("Success:", values);
     navigate("/content");
-    setIsModalOpen(false);
+    // setIsModalOpen(false);
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -57,6 +58,11 @@ function UpdateFormProduct(props) {
         onOk={handleOk}
         onCancel={handleCancel}
       >
+        {loadingUpdate && (
+          <div className="example">
+            <Spin />
+          </div>
+        )}
         <Form
           form={form}
           name="basic"

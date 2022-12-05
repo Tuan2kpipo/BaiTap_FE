@@ -31,7 +31,7 @@ const style = {
 function LayOutContent() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { allProducts, getProductFalse, loading } = useSelector(
+  const { allProducts, getProductFalse, loading, loadingDelete } = useSelector(
     (state) => state.productRd
   );
   const [titleCard, setTitleCard] = useState("");
@@ -73,6 +73,11 @@ function LayOutContent() {
 
   return (
     <>
+      {loadingDelete && (
+        <div className="example">
+          <Spin />
+        </div>
+      )}
       <Content
         className="site-layout"
         style={{

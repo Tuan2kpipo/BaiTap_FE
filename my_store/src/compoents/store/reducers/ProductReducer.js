@@ -4,49 +4,97 @@ const reducerInitialState = {
   allProducts: null,
   product: null,
   getSearch: null,
-  loading: null,
+
+  loading: false,
+  loadingAdd: false,
+  loadingUpdate: false,
+  loadingDelete: false,
+  loadingGetSing: false,
+
   getProductFalse: null,
+  addProductFalse: null,
+  updateProductFalse: null,
+  deleteProductFalse: null,
+  getSingProductFalse: null,
 };
 
 const reducer = (state = reducerInitialState, action) => {
   const { type, payload } = action;
   switch (type) {
+    // laoding request
     case Types.GET_PRODUCT_REQUEST:
-    case Types.DELETE_PRODUCT_REQUEST:
-    case Types.ADD_PRODUCT_REQUEST:
-    case Types.GET_SING_PRODUCT_REQUEST:
-    case Types.UPDATE_PRODUCT_REQUEST:
       return { ...state, loading: true };
 
-    case Types.GET_ALL:
-    case Types.GET_PRODUCT_SUCCESS:
-      return { ...state, allProducts: payload, loading: false };
+    case Types.DELETE_PRODUCT_REQUEST:
+      return { ...state, loadingDelete: true };
 
+    case Types.ADD_PRODUCT_REQUEST:
+      return { ...state, loadingAdd: true };
+
+    case Types.GET_SING_PRODUCT_REQUEST:
+      return { ...state, loadingGetSing: true };
+
+    case Types.UPDATE_PRODUCT_REQUEST:
+      return {
+        ...state,
+        loadingUpdate: true,
+      };
+
+    //loading false
     case Types.GET_PRODUCT_FALSE:
-    case Types.DELETE_PRODUCT_FALSE:
-    case Types.ADD_PRODUCT_FALSE:
-    case Types.GET_SING_PRODUCT_FALSE:
-    case Types.UPDATE_PRODUCT_FALSE:
       return {
         ...state,
         getProductFalse: payload,
         loading: false,
       };
 
+    case Types.DELETE_PRODUCT_FALSE:
+      return {
+        ...state,
+        deleteProductFalse: payload,
+        loadingDelete: false,
+      };
+
+    case Types.ADD_PRODUCT_FALSE:
+      return {
+        ...state,
+        addProductFalse: payload,
+        loadingAdd: false,
+      };
+
+    case Types.GET_SING_PRODUCT_FALSE:
+      return {
+        ...state,
+        getSingProductFalse: payload,
+        loadingGetSing: false,
+      };
+
+    case Types.UPDATE_PRODUCT_FALSE:
+      return {
+        ...state,
+        updateProductFalse: payload,
+        loadingUpdate: false,
+      };
+
+    // loading success
+    case Types.GET_ALL:
+    case Types.GET_PRODUCT_SUCCESS:
+      return { ...state, allProducts: payload, loading: false };
+
     case Types.GET_SING_PRODUCT_SUCCESS:
-      return { ...state, product: action.payload, loading: false };
+      return { ...state, product: action.payload, loadingGetSing: false };
 
     case Types.DELETE_PRODUCT_SUCCESS:
       return {
         ...state,
         allProducts: state.allProducts.filter((e) => e.id !== action.payload),
-        loading: false,
+        loadingDelete: false,
       };
     case Types.ADD_PRODUCT_SUCCESS:
       return {
         ...state,
         allProducts: [...state.allProducts, action.payload],
-        loading: false,
+        loadingAdd: false,
       };
 
     case Types.UPDATE_PRODUCT_SUCCESS:
@@ -62,7 +110,7 @@ const reducer = (state = reducerInitialState, action) => {
       return {
         ...state,
         allProducts: listProducts,
-        loading: false,
+        loadingUpdate: false,
       };
 
     case Types.GET_SEARCH:

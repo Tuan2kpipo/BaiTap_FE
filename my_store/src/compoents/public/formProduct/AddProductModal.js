@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Modal, Checkbox, Form, Input } from "antd";
+import { Button, Modal, Checkbox, Form, Input, Spin } from "antd";
 import "./AddFormProduct.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,7 +7,7 @@ import { addProduct } from "../../store/Actions/ProductAction";
 
 function AddFormProduct(props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { loading } = useSelector((state) => state.productRd);
+  const { loadingAdd } = useSelector((state) => state.productRd);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -22,20 +22,19 @@ function AddFormProduct(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const onFinish = (values) => {
-    setIsModalOpen(false);
     const dataProduct = {
       ...values,
       id: Math.floor(Math.random() * 1000),
     };
     dispatch(addProduct(dataProduct));
-    console.log("Success:", dataProduct);
     navigate("/content");
-    setIsModalOpen(false);
-
-    console.log("laoddinggggg", loading);
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
+  };
+
+  const handleAddProduct = () => {
+    // setTimeout(setIsModalOpen(false), 5000);
   };
 
   return (
@@ -50,6 +49,11 @@ function AddFormProduct(props) {
         onOk={handleOk}
         onCancel={handleCancel}
       >
+        {loadingAdd && (
+          <div className="example">
+            <Spin />
+          </div>
+        )}
         <Form
           name="basic"
           labelCol={{ span: 6 }}
@@ -79,7 +83,7 @@ function AddFormProduct(props) {
           </Form.Item>
 
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button type="danger" htmlType="submit">
+            <Button type="danger" htmlType="submit" onClick={handleAddProduct}>
               Thêm
             </Button>
           </Form.Item>

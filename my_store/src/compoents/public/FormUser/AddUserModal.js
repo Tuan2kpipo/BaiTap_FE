@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Modal, Checkbox, Form, Input, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import "../FormProduct/AddFormProduct.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../../store/Actions/UserAction";
 import "./AddUserModal.css";
 
@@ -10,6 +10,7 @@ function AddUserForm(props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const { loadingAdd } = useSelector((state) => state.userRd);
 
   // show modal
   const showModal = () => {
@@ -50,6 +51,11 @@ function AddUserForm(props) {
         onOk={handleOk}
         onCancel={handleCancel}
       >
+        {loadingAdd && (
+          <div className="example">
+            <Spin />
+          </div>
+        )}
         <Form
           name="basic"
           labelCol={{ span: 6 }}

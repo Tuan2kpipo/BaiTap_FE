@@ -22,12 +22,9 @@ function LoginForm() {
   return (
     <div className="login">
       {loading && (
-        <LoadingOutlined
-          style={{
-            fontSize: 24,
-          }}
-          spin
-        />
+        <div className="example">
+          <Spin />
+        </div>
       )}
       <Form
         name="basic"
