@@ -1,15 +1,5 @@
 import styled from "styled-components";
-import {
-  Breadcrumb,
-  Layout,
-  Card,
-  Col,
-  Row,
-  Divider,
-  Button,
-  Modal,
-  Popconfirm,
-} from "antd";
+import { Layout } from "antd";
 
 const { Content } = Layout;
 export const StyledBtnDiv = styled.div`
