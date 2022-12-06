@@ -31,11 +31,11 @@ const style = {
 function LayOutContent() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { allProducts, getProductFalse, loading, loadingDelete } = useSelector(
-    (state) => state.productRd
-  );
+  const { allProducts, loading } = useSelector((state) => state.productRd);
   const [titleCard, setTitleCard] = useState("");
   const [descriptionCard, setdescriptionCard] = useState("");
+  const [idProduct, setIdProduct] = useState();
+  const [imgProduct, setImgProduct] = useState("");
 
   // cac ham cua modal
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -54,9 +54,8 @@ function LayOutContent() {
 
   //xoa
   const handleDelete = (id) => {
-    if (window.confirm("Ban co muon xoa khong")) {
-      dispatch(ACTIONS.deleteProduct(id));
-    }
+    setIdProduct(id);
+    dispatch(ACTIONS.deleteProduct(id));
   };
 
   //xem
@@ -64,6 +63,7 @@ function LayOutContent() {
     setIsModalOpen(true);
     setTitleCard(products.title);
     setdescriptionCard(products.description);
+    setImgProduct(products.image);
   };
 
   // click chuyen sang trang uẻ
@@ -73,11 +73,6 @@ function LayOutContent() {
 
   return (
     <>
-      {loadingDelete && (
-        <div className="example">
-          <Spin />
-        </div>
-      )}
       <Content
         className="site-layout"
         style={{
@@ -138,6 +133,7 @@ function LayOutContent() {
                             type="primary"
                             className="btn_delete"
                             onClick={() => handleDelete(products.id)}
+                            loading={products.id === idProduct ? true : false}
                           >
                             Xóa
                           </Button>
@@ -162,6 +158,13 @@ function LayOutContent() {
           <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
             <p>{titleCard}</p>
             <p>{descriptionCard}</p>
+            <div className="images_product">
+              <img
+                className="img_product"
+                src={imgProduct}
+                alt="anh product"
+              ></img>
+            </div>
           </Modal>
         </div>
       </Content>

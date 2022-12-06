@@ -14,9 +14,7 @@ const { Content } = Layout;
 function InfoUser() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { allUsers, loading, getUserFalse, loadingDelete } = useSelector(
-    (state) => state.userRd
-  );
+  const { allUsers, loading } = useSelector((state) => state.userRd);
 
   //Lay tat ca du lieu
   useEffect(() => {
@@ -29,11 +27,6 @@ function InfoUser() {
 
   return (
     <div>
-      {loadingDelete && (
-        <div className="example">
-          <Spin />
-        </div>
-      )}
       <Content
         style={{
           padding: "0 50px",
@@ -65,8 +58,6 @@ function InfoUser() {
               spin
             />
           )}
-
-          {getUserFalse && <h1>{getUserFalse}</h1>}
 
           <ComponentTable
             allInfo={allUsers}

@@ -26,16 +26,15 @@ function AddFormProduct(props) {
       ...values,
       id: Math.floor(Math.random() * 1000),
     };
-    dispatch(addProduct(dataProduct));
     navigate("/content");
+    dispatch(addProduct(dataProduct));
+    setTimeout(() => setIsModalOpen(false), 2000);
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
 
-  const handleAddProduct = () => {
-    // setTimeout(setIsModalOpen(false), 5000);
-  };
+  const handleAddProduct = () => {};
 
   return (
     <>
@@ -49,11 +48,6 @@ function AddFormProduct(props) {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        {loadingAdd && (
-          <div className="example">
-            <Spin />
-          </div>
-        )}
         <Form
           name="basic"
           labelCol={{ span: 6 }}
@@ -83,7 +77,12 @@ function AddFormProduct(props) {
           </Form.Item>
 
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button type="danger" htmlType="submit" onClick={handleAddProduct}>
+            <Button
+              type="danger"
+              htmlType="submit"
+              onClick={handleAddProduct}
+              loading={loadingAdd}
+            >
               Thêm
             </Button>
           </Form.Item>

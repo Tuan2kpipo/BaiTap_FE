@@ -28,7 +28,7 @@ function UpdateFormProduct(props) {
     dispatch(updateProduct(values, products.id));
     console.log("Success:", values);
     navigate("/content");
-    // setIsModalOpen(false);
+    setTimeout(() => setIsModalOpen(false), 2000);
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -58,11 +58,6 @@ function UpdateFormProduct(props) {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        {loadingUpdate && (
-          <div className="example">
-            <Spin />
-          </div>
-        )}
         <Form
           form={form}
           name="basic"
@@ -93,7 +88,7 @@ function UpdateFormProduct(props) {
           </Form.Item>
 
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button type="danger" htmlType="submit">
+            <Button type="danger" htmlType="submit" loading={loadingUpdate}>
               Sửa
             </Button>
           </Form.Item>

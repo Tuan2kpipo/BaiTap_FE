@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Table, Space, Button, Modal, Tag } from "antd";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as ACTIONS from "../../store/Actions/UserAction";
 import "./ComponentTable.css";
 import UpdateUser from "../FormUser/UpdateUserModal";
@@ -8,13 +8,12 @@ import UpdateUser from "../FormUser/UpdateUserModal";
 const { Column } = Table;
 function ComponentTable(props) {
   const { allInfo } = props;
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [NameUser, setNameUser] = useState("");
   const [EmailUser, setEmailUser] = useState("");
   const [PasswordUser, setPasswordUser] = useState("");
   const dispatch = useDispatch();
-
+  const [idUser, setIdUser] = useState();
   // chuc nang xem
   const handleDetail = (user) => {
     setIsModalOpen(true);
@@ -32,9 +31,8 @@ function ComponentTable(props) {
 
   // chuc nang xoa
   const handleDelete = (id) => {
-    if (window.confirm("Ban co muon xoa khong")) {
-      dispatch(ACTIONS.deleteUser(id));
-    }
+    setIdUser(id);
+    dispatch(ACTIONS.deleteUser(id));
   };
 
   return (
@@ -57,7 +55,13 @@ function ComponentTable(props) {
             <Space className="space_tb" size="middle">
               <UpdateUser idupdateUser={record}></UpdateUser>
 
-              <Button onClick={() => handleDelete(record.id)}>Xóa</Button>
+              <Button
+                onClick={() => handleDelete(record.id)}
+                loading={record.id === idUser ? true : false}
+              >
+                Xóa
+              </Button>
+
               <Button onClick={() => handleDetail(record)}>Xem</Button>
             </Space>
           )}

@@ -23,7 +23,7 @@ function AddUserForm(props) {
 
   const onFinish = (values) => {
     dispatch(updateUser(values, idupdateUser.id));
-    // setIsModalOpen(false);
+    setTimeout(() => setIsModalOpen(false), 2000);
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -51,11 +51,6 @@ function AddUserForm(props) {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        {loadingUpdate && (
-          <div className="example">
-            <Spin />
-          </div>
-        )}
         <Form
           form={form}
           name="basic"
@@ -82,7 +77,7 @@ function AddUserForm(props) {
           </Form.Item>
 
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button type="danger" htmlType="submit">
+            <Button type="danger" htmlType="submit" loading={loadingUpdate}>
               Sửa
             </Button>
           </Form.Item>
