@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Button, Modal, Checkbox, Form, Input, Spin } from "antd";
-import "./AddFormProduct.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../../store/Actions/ProductAction";
-
+import { AddProductModal } from "./StyleFormProduct/AddFormStyleProduct";
 function AddFormProduct(props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { loadingAdd } = useSelector((state) => state.productRd);
@@ -41,7 +40,7 @@ function AddFormProduct(props) {
       <Button type="primary" onClick={showModal}>
         Thêm sản phẩm
       </Button>
-      <Modal
+      <AddProductModal
         forceRender
         title="Thêm sản phẩm"
         open={isModalOpen}
@@ -87,7 +86,7 @@ function AddFormProduct(props) {
             </Button>
           </Form.Item>
         </Form>
-      </Modal>
+      </AddProductModal>
     </>
   );
 }

@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 import { Button, Modal, Checkbox, Form, Input, Spin } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
-import "../FormProduct/AddFormProduct.css";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../../store/Actions/UserAction";
-import "./AddUserModal.css";
-
+import { StyleAddUser, StyleAddUserModal } from "./FormUserStyle/AddFormStyle";
 function AddUserForm(props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
   const { loadingAdd } = useSelector((state) => state.userRd);
 
   // show modal
@@ -43,7 +39,8 @@ function AddUserForm(props) {
         Thêm người dùng
       </Button>
 
-      <Modal
+      <StyleAddUserModal
+        className="modalAddUser"
         forceRender
         title="Thêm người dùng"
         open={isModalOpen}
@@ -80,7 +77,7 @@ function AddUserForm(props) {
             </Button>
           </Form.Item>
         </Form>
-      </Modal>
+      </StyleAddUserModal>
     </>
   );
 }

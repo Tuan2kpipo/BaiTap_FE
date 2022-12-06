@@ -3,8 +3,8 @@ import { LoadingOutlined } from "@ant-design/icons";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { login } from "../store/Actions/AuthAction";
-import "./Login.css";
+import { login } from "../../store/Actions/AuthAction";
+import { StyledLogin } from "./StyledLogin";
 function LoginForm() {
   const { loading } = useSelector((state) => state.authRd);
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ function LoginForm() {
   };
 
   return (
-    <div className="login">
+    <StyledLogin>
       {loading && (
         <div className="example">
           <Spin />
@@ -88,7 +88,7 @@ function LoginForm() {
           </Button>
         </Form.Item>
       </Form>
-    </div>
+    </StyledLogin>
   );
 }
 

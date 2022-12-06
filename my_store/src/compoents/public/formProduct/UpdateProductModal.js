@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Button, Modal, Checkbox, Form, Input, Spin } from "antd";
-import "./AddFormProduct.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addProduct, updateProduct } from "../../store/Actions/ProductAction";
-
+import { UpdateProductModal } from "./StyleFormProduct/UpdateFormStyle";
 function UpdateFormProduct(props) {
   const { products } = props;
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -51,7 +50,7 @@ function UpdateFormProduct(props) {
       <Button type="primary" onClick={showModal}>
         Sửa
       </Button>
-      <Modal
+      <UpdateProductModal
         forceRender
         title="Sửa thông tin"
         open={isModalOpen}
@@ -93,7 +92,7 @@ function UpdateFormProduct(props) {
             </Button>
           </Form.Item>
         </Form>
-      </Modal>
+      </UpdateProductModal>
     </>
   );
 }

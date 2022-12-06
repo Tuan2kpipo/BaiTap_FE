@@ -7,17 +7,25 @@ import {
   Divider,
   Button,
   Modal,
-  Spin,
+  Popconfirm,
 } from "antd";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as ACTIONS from "../../store/Actions/ProductAction";
-import "./LayOutContent.css";
 import { useNavigate } from "react-router-dom";
 import AddFormProduct from "../../public/FormProduct/AddProductModal";
 import UpdateFormProduct from "../../public/FormProduct/UpdateProductModal";
 import { LoadingOutlined } from "@ant-design/icons";
 
+import {
+  StyledBtnDiv,
+  StyleBtnUpdate,
+  StyledAddProduct,
+  StyledImgCard,
+  StyledCard,
+  ColCard,
+  ContentProduct,
+} from "./StyledCssContent/StyledContent";
 const { Content } = Layout;
 const { Meta } = Card;
 
@@ -73,8 +81,7 @@ function LayOutContent() {
 
   return (
     <>
-      <Content
-        className="site-layout"
+      <ContentProduct
         style={{
           padding: "0 50px",
         }}
@@ -85,13 +92,14 @@ function LayOutContent() {
           }}
         ></Breadcrumb>
         <div
-          className="site-layout-background"
           style={{
             padding: 24,
             minHeight: 380,
           }}
         >
-          <AddFormProduct></AddFormProduct>
+          <StyledAddProduct>
+            <AddFormProduct></AddFormProduct>
+          </StyledAddProduct>
 
           <Button type="primary" onClick={handleInfoUser}>
             Thông tin người dùng
@@ -112,46 +120,57 @@ function LayOutContent() {
               allProducts.length > 0 &&
               allProducts.map((products, index) => {
                 return (
-                  <Col key={index} className="gutter-row" span={4}>
+                  <ColCard key={index} span={4}>
                     <div style={style}>
-                      <Card
-                        hoverable
-                        style={{
-                          width: 240,
-                        }}
-                        cover={
-                          <img
-                            className="img_card"
-                            alt="example"
-                            src={products.image}
-                          />
-                        }
-                      >
-                        <Meta title={products.description} />
-                        <div className="btn_card_product">
-                          <Button
-                            type="primary"
-                            className="btn_delete"
-                            onClick={() => handleDelete(products.id)}
-                            loading={products.id === idProduct ? true : false}
-                          >
-                            Xóa
-                          </Button>
+                      <StyledCard>
+                        <Card
+                          hoverable
+                          style={{
+                            width: 220,
+                          }}
+                          cover={
+                            <StyledImgCard
+                              alt="example"
+                              src={products.image}
+                            ></StyledImgCard>
+                          }
+                        >
+                          <Meta title={products.description} />
+                          <StyledBtnDiv>
+                            <Popconfirm
+                              title="Bạn có muốn xóa sản phẩm này không ?"
+                              okText="Có"
+                              cancelText="Không"
+                              onConfirm={() => handleDelete(products.id)}
+                            >
+                              <Button
+                                type="primary"
+                                className="btn_delete"
+                                loading={
+                                  products.id === idProduct ? true : false
+                                }
+                              >
+                                Xóa
+                              </Button>
+                            </Popconfirm>
 
-                          <UpdateFormProduct
-                            products={products}
-                          ></UpdateFormProduct>
+                            <StyleBtnUpdate>
+                              <UpdateFormProduct
+                                products={products}
+                              ></UpdateFormProduct>
+                            </StyleBtnUpdate>
 
-                          <Button
-                            type="primary"
-                            onClick={() => handleDetail(products)}
-                          >
-                            Xem
-                          </Button>
-                        </div>
-                      </Card>
+                            <Button
+                              type="primary"
+                              onClick={() => handleDetail(products)}
+                            >
+                              Xem
+                            </Button>
+                          </StyledBtnDiv>
+                        </Card>
+                      </StyledCard>
                     </div>
-                  </Col>
+                  </ColCard>
                 );
               })}
           </Row>
@@ -167,7 +186,7 @@ function LayOutContent() {
             </div>
           </Modal>
         </div>
-      </Content>
+      </ContentProduct>
     </>
   );
 }

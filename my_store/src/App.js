@@ -3,7 +3,7 @@ import { Routes, Route, Router, Outlet, Navigate } from "react-router-dom";
 import { path } from "./compoents/Ultils/Constant";
 import LayoutStore from "./compoents/Layout/LayOutHeader/LayoutHeader";
 import LayOutContent from "./compoents/Layout/LayOutProduct/LayOutContent";
-import LoginForm from "./compoents/public/Login";
+import LoginForm from "./compoents/public/Login/Login";
 
 import InfoUser from "./compoents/Layout/LayOutUser/LayOutUser";
 import { useSelector } from "react-redux";

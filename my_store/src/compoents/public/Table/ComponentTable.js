@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Table, Space, Button, Modal, Tag } from "antd";
+import { Table, Space, Button, Modal, Tag, Popconfirm } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import * as ACTIONS from "../../store/Actions/UserAction";
-import "./ComponentTable.css";
-import UpdateUser from "../FormUser/UpdateUserModal";
 
+import UpdateUser from "../FormUser/UpdateUserModal";
+import { StyledLayoutTable } from "./StyledTable/StyledTable";
 const { Column } = Table;
 function ComponentTable(props) {
   const { allInfo } = props;
@@ -36,7 +36,7 @@ function ComponentTable(props) {
   };
 
   return (
-    <div className="tb_cpn">
+    <StyledLayoutTable>
       <Table dataSource={allInfo}>
         <Column
           color="blue"
@@ -55,12 +55,19 @@ function ComponentTable(props) {
             <Space className="space_tb" size="middle">
               <UpdateUser idupdateUser={record}></UpdateUser>
 
-              <Button
-                onClick={() => handleDelete(record.id)}
-                loading={record.id === idUser ? true : false}
+              <Popconfirm
+                title="Bạn có muốn xóa người dùng này không ?"
+                okText="Có"
+                cancelText="Không"
+                onConfirm={() => handleDelete(record.id)}
               >
-                Xóa
-              </Button>
+                <Button
+                  type="primary"
+                  loading={record.id === idUser ? true : false}
+                >
+                  Xóa
+                </Button>
+              </Popconfirm>
 
               <Button onClick={() => handleDetail(record)}>Xem</Button>
             </Space>
@@ -73,7 +80,7 @@ function ComponentTable(props) {
         <p>Email: {EmailUser}</p>
         <p>Password: {PasswordUser}</p>
       </Modal>
-    </div>
+    </StyledLayoutTable>
   );
 }
 

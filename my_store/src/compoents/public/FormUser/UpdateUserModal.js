@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Button, Modal, Checkbox, Form, Input, Spin } from "antd";
-import "../FormProduct/AddFormProduct.css";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, updateUser } from "../../store/Actions/UserAction";
-
+import { StyleUpdateUserModal } from "./FormUserStyle/UpdateUserModal";
 function AddUserForm(props) {
   const { idupdateUser } = props;
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -44,7 +43,7 @@ function AddUserForm(props) {
   return (
     <>
       <Button onClick={showModal}>Sửa</Button>
-      <Modal
+      <StyleUpdateUserModal
         forceRender
         title="Sua người dùng"
         open={isModalOpen}
@@ -82,7 +81,7 @@ function AddUserForm(props) {
             </Button>
           </Form.Item>
         </Form>
-      </Modal>
+      </StyleUpdateUserModal>
     </>
   );
 }

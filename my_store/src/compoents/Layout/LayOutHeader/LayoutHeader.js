@@ -5,7 +5,8 @@ import { path } from "../../Ultils/Constant";
 import { useDispatch } from "react-redux";
 import { searchProduct } from "../../store/Actions/ProductAction";
 import { logout } from "../../store/Actions/AuthAction";
-import "./LayOutHeader.css";
+import { HeaderDiv, HeaderSpan } from "./StyledCssHeader/StyledHeader";
+import { HeaderLayOut } from "./StyledCssHeader/StyledHeader";
 
 const { Header } = Layout;
 
@@ -37,7 +38,7 @@ function LayoutStore() {
   return (
     <>
       <Layout>
-        <Header
+        <HeaderLayOut
           style={{
             position: "sticky",
             top: 0,
@@ -45,18 +46,22 @@ function LayoutStore() {
             width: "100%",
           }}
         >
-          <div className="btn_layout_header">
-            <Button type="primary" onClick={goHome}>
-              Trang chủ
-            </Button>
+          <HeaderDiv>
+            <HeaderSpan>
+              <Button type="primary" onClick={goHome}>
+                Trang chủ
+              </Button>
+            </HeaderSpan>
 
             <Input placeholder="Tim kiem" onChange={handleSearch} />
 
-            <Button className="logout" onClick={logOut}>
-              Đăng xuất
-            </Button>
-          </div>
-        </Header>
+            <HeaderSpan>
+              <Button className="logout" onClick={logOut}>
+                Đăng xuất
+              </Button>
+            </HeaderSpan>
+          </HeaderDiv>
+        </HeaderLayOut>
       </Layout>
 
       <div>
