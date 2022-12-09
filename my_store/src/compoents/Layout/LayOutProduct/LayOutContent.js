@@ -25,6 +25,7 @@ import {
   StyledCard,
   ColCard,
   ContentProduct,
+  InfoImageProduct,
 } from "./StyledCssContent/StyledContent";
 const { Content } = Layout;
 const { Meta } = Card;
@@ -177,13 +178,9 @@ function LayOutContent() {
           <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
             <p>{titleCard}</p>
             <p>{descriptionCard}</p>
-            <div className="images_product">
-              <img
-                className="img_product"
-                src={imgProduct}
-                alt="anh product"
-              ></img>
-            </div>
+            <InfoImageProduct>
+              <StyledImgCard src={imgProduct} alt="anh product"></StyledImgCard>
+            </InfoImageProduct>
           </Modal>
         </div>
       </ContentProduct>

@@ -37,3 +37,10 @@ export const ContentProduct = styled(Content)`
     margin: 0 !important;
   }
 `;
+
+export const InfoImageProduct = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
